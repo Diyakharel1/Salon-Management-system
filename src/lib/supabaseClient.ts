@@ -19,6 +19,6 @@ function getClient(): SupabaseClient {
 // Lazy init so build/prerender succeeds when env vars are only set at runtime (e.g. in deployment).
 export const supabase = new Proxy({} as SupabaseClient, {
   get(_, prop) {
-    return (getClient() as Record<string | symbol, unknown>)[prop];
+    return (getClient() as unknown as Record<string | symbol, unknown>)[prop];
   },
 });
